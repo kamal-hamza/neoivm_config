@@ -1,1 +1,1 @@
-require("lua.init")
+require("config.lazy")
