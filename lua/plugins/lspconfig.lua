@@ -12,6 +12,7 @@ return {
             local keymap = vim.keymap
             local opts = { noremap = true, silent = true }
             local on_attach = function(client, bufnr)
+                client.server_capabilities.signatureHelpProvider = false
                 opts.buffer = bufnr
                 opts.desc = "Show LSP references"
                 keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)

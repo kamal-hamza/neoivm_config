@@ -9,7 +9,6 @@ return {
                     "cssls",
                     "tailwindcss",
                     "html",
-                    "clangd",
                     "lua_ls",
                 },
                 automatic_installation = true,

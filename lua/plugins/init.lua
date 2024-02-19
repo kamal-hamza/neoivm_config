@@ -3,8 +3,7 @@ return {
     require("plugins.nvim-tree"),
     require("plugins.telescope"),
     require("plugins.telescope-fzy-native"),
-    require("plugins.mason"),
-    require("plugins.mason-lspconfig"),
+    require("plugins.mason"), 
     require("plugins.lspconfig"),
     require("plugins.nvim-treesitter"),
     require("plugins.notify"),
@@ -14,5 +13,7 @@ return {
     require("plugins.toggleterm"),
     require("plugins.nvim-cmp"),
     require("plugins.gitsigns"),
+    require("plugins.lazygit"),
+    require("plugins.mason-lspconfig"),
 }
 
