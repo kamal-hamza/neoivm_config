@@ -14,6 +14,8 @@ return {
     require("plugins.nvim-cmp"),
     require("plugins.gitsigns"),
     require("plugins.lazygit"),
+    require("plugins.autopairs"),
+    require("plugins.dashboard"),
     require("plugins.mason-lspconfig"),
 }
 
