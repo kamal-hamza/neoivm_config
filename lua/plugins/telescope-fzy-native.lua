@@ -1,6 +1,6 @@
 return {
     {
-        "nvim-telescope/telescope-fzy-native.nvim",
+        'nvim-telescope/telescope-fzy-native.nvim',
         lazy = false,
         enabled = true,
     }

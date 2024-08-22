@@ -5,6 +5,7 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
         lazy = false,
+        priority = 800,
         config = function ()
             require("mason").setup({
                 ui = {
