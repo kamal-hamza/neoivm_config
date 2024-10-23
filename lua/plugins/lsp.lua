@@ -1,134 +1,130 @@
 return {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-        "j-hui/fidget.nvim",
-    },
+   "neovim/nvim-lspconfig",
+   dependencies = {
+      "mason-lspconfig.nvim",
+      "williamboman/mason.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/nvim-cmp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "j-hui/fidget.nvim",
+      "onsails/lspkind.nvim",
+   },
+   config = function()
+      local mason = require("mason")
+      local lspconfig = require("lspconfig")
+      local mason_lspconfig = require("mason-lspconfig")
+      local cmp = require("cmp")
+      local cmp_lsp = require("cmp_nvim_lsp")
+      local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
 
-    config = function()
-        local cmp = require('cmp')
-        local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+      local capabilities = cmp_lsp.default_capabilities()
 
-        require("fidget").setup({})
-        require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "rust_analyzer",
-                "clangd",
-                "pyright",
-            },
-            handlers = {
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
+      vim.api.nvim_set_hl(0, "transparentBG", { bg = "NONE", fg = "LightGray" })
 
-                zls = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.zls.setup({
-                        root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                        settings = {
-                            zls = {
-                                enable_inlay_hints = true,
-                                enable_snippets = true,
-                                warn_style = true,
-                            },
-                        },
-                    })
-                    vim.g.zig_fmt_parse_errors = 0
-                    vim.g.zig_fmt_autosave = 0
-
-                end,
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                runtime = { version = "Lua 5.1" },
-                                diagnostics = {
-                                    globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                end,
-                ["clangd"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.clangd.setup {
-                        capabilities = capabilities,
-                    }
-                end,
-                ["pyright"] = function ()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.pyright.setup {
-                       capabilities = capabilities,
-                       settings = {
-                          python = {
-                             analysis = {
-                                 typeCheckingMode = "off",
-                             },
-                             pythonPath = vim.fn.exepath("python3"),
-                          },
-                       },
-                    }
-                end,
-                ["ts_ls"] = function ()
-                  local lspconfig = require("lspconfig")
-                  lspconfig.ts_ls.setup {
-                     capabilities = capabilities,
-                  }
-                end,
-            }
-        })
-
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                end,
-            },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
+      cmp.setup({
+         snippet = {
+            expand = function(args)
+               luasnip.lsp_expand(args.body)
+            end,
+         },
+         sources = {
+            { name = "nvim_lsp" },
+            { name = "buffer" },
+            { name = "path" },
+            { name = "luasnip" },
+         },
+         mapping = cmp.mapping.preset.insert({
+            ["<C-p>"] = cmp.mapping.scroll_docs(-1),
+            ["<C-n>"] = cmp.mapping.scroll_docs(1),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+         }),
+         window = {
+            completion = cmp.config.window.bordered({ col_offset = -2, side_padding = 0, border = "rounded" }),
+            documentation = cmp.config.window.bordered({ border = "double" }),
+         },
+         view = {
+            entries = { name = "custom", selection_order = "near_cursor" }
+         },
+         formatting = {
+            format = lspkind.cmp_format({
+               mode = "symbol_text",
+               menu = ({
+                  buffer = "[Buffer]",
+                  nvim_lsp = "[LSP]",
+                  luasnip = "[LuaSnip]",
+                  nvim_lua = "[Lua]",
+                  latex_symbols = "[Latex]",
+               }),
             }),
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' }, -- For luasnip users.
-            }, {
-                { name = 'buffer' },
-            })
-        })
+         },
+      })
 
-        vim.diagnostic.config({
-            -- update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
+      cmp.setup.cmdline(":", {
+         mapping = cmp.mapping.preset.cmdline(),
+         sources = cmp.config.sources({
+            { name = "path" },
+         }, {
+            {
+               name = "cmdline",
+               option = {
+                  ignore_cmds = { "Man", "!" },
+               },
             },
-        })
-    end
+         })
+      })
+
+      mason.setup({
+         ui = {
+            icons = {
+               package_installed = "✓",
+               package_pending = "➜",
+               package_uninstalled = "✗",
+            },
+            check_outdated_packages_on_open = true,
+            keymaps = {
+               toggle_package_expand = "e",
+               install_package = "<CR>",
+               update_package = "u",
+               uninstall_package = "x",
+            },
+         },
+      })
+
+      mason_lspconfig.setup({
+         ensure_installed = {
+            "pyright",
+            "clangd",
+            "lua_ls",
+            "ts_ls",
+            "rust_analyzer",
+         },
+         automatic_installation = true,
+         handlers = {
+            function(server_name)
+               lspconfig[server_name].setup({
+                  capabilities = capabilities
+               })
+            end,
+            ["lua_ls"] = function ()
+               lspconfig.lua_ls.setup({
+                  capabilities = capabilities,
+                  settings = {
+                     Lua = {
+                        diagnostics = {
+                           globals = { "vim" },
+                        }
+                     }
+                  },
+               })
+            end,
+         },
+      })
+   end,
 }
