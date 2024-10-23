@@ -74,6 +74,26 @@ return {
                         capabilities = capabilities,
                     }
                 end,
+                ["pyright"] = function ()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pyright.setup {
+                       capabilities = capabilities,
+                       settings = {
+                          python = {
+                             analysis = {
+                                 typeCheckingMode = "off",
+                             },
+                             pythonPath = vim.fn.exepath("python3"),
+                          },
+                       },
+                    }
+                end,
+                ["ts_ls"] = function ()
+                  local lspconfig = require("lspconfig")
+                  lspconfig.ts_ls.setup {
+                     capabilities = capabilities,
+                  }
+                end,
             }
         })
 
