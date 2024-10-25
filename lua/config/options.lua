@@ -1,3 +1,4 @@
+THEME = "nightfox"
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
@@ -9,4 +10,3 @@ vim.opt.relativenumber = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.updatetime = 50
-print("options loaded")

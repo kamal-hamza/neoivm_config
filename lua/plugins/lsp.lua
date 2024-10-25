@@ -10,7 +10,6 @@ return {
       "hrsh7th/nvim-cmp",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      "j-hui/fidget.nvim",
       "onsails/lspkind.nvim",
    },
    config = function()
@@ -104,6 +103,7 @@ return {
             "lua_ls",
             "ts_ls",
             "rust_analyzer",
+            "cmake",
          },
          automatic_installation = true,
          handlers = {
@@ -121,6 +121,16 @@ return {
                            globals = { "vim" },
                         }
                      }
+                  },
+               })
+            end,
+            ["cmake"] = function()
+               lspconfig.cmake.setup({
+                  capabilities = capabilities,
+                  settings = {
+                     CMake = {
+                        filetypes = { "cmake", "CMakeLists.txt" },
+                     },
                   },
                })
             end,
