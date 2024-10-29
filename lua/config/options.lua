@@ -10,3 +10,5 @@ vim.opt.relativenumber = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.updatetime = 50
+vim.opt.scrolloff = 10
+vim.g.mapleader = " "

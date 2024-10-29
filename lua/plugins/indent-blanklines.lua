@@ -4,9 +4,8 @@ return {
       "nvim-treesitter/nvim-treesitter",
    },
    event = { "BufReadPre", "BufNewFile" },
-   main = "ibl",
-   opts = {
-      scope = { show_start = true, show_end = true },
-      indent = { char = "┊" },
-   },
+   config = function ()
+      local ibl = require("ibl")
+      ibl.setup({})
+   end
 }

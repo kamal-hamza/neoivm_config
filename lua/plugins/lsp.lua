@@ -104,6 +104,7 @@ return {
             "ts_ls",
             "rust_analyzer",
             "cmake",
+            "ltex",
          },
          automatic_installation = true,
          handlers = {
