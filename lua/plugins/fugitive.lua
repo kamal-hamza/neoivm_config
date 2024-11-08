@@ -3,10 +3,11 @@ return {
    dependencies = {
       "folke/noice.nvim",
       "ibhagwan/fzf-lua",
+      "carbon-steel/detour.nvim",
    },
    config = function ()
       local fzf = require("fzf-lua")
-
+      local detour = require("detour")
 
       local function checkoutBranch()
          if vim.fn.system("git rev-parse --is-inside-work-tree"):match("true") then
@@ -14,7 +15,7 @@ return {
                actions = {
                   ["default"] = function(selected_branch)
                      local branch = selected_branch[1]
-                     vim.cmd("Git switch " .. branch)
+                     vim.cmd("Git switch " ..branch)
                   end,
                },
             })
@@ -50,13 +51,13 @@ return {
                      end
                      if branch:match("^origin/") then
                         local remote_branch = branch:gsub("^origin/", "")
-                        vim.cmd("Git push origin --delete " .. remote_branch)
-                        vim.notify("Deleted remote branch: " .. branch)
+                        vim.cmd("Git push origin --delete " ..remote_branch)
+                        vim.notify("Deleted remote branch: " ..branch)
                      else
                         local confirm = vim.fn.confirm("Delete local branch '" .. branch .. "'?", "&Yes\n&No")
                         if confirm == 1 then
-                           vim.cmd("Git branch -d " .. branch)
-                           vim.notify("Deleted local branch: " .. branch)
+                           vim.cmd("Git branch -d " ..branch)
+                           vim.notify("Deleted local branch: " ..branch)
                         end
                      end
                   end,
@@ -75,7 +76,8 @@ return {
                actions = {
                   ["default"] = function(selected_files)
                      for _, file in ipairs(selected_files) do
-                        vim.cmd("Git add " ..file)
+                        local clean_file = file:match("[\128-\255]+(.+)$")
+                        vim.cmd("Git add " ..clean_file)
                      end
                      vim.notify("Added all files!")
                   end,
@@ -86,6 +88,24 @@ return {
          end
       end
 
+      local function gitStatus()
+         local popup_id = detour.Detour({})
+         if not popup_id then
+            vim.notify("Unable to open popup!", vim.log.levels.ERROR)
+            return
+         end
+         vim.cmd.terminal("git status")
+         vim.bo.bufhidden = "delete"
+         vim.wo[popup_id].signcolumn = "no"
+         vim.keymap.set("n", "<Esc>", "<cmd>q<CR>", { buffer = true })
+         vim.api.nvim_create_autocmd({"TermClose"}, {
+            buffer = vim.api.nvim_get_current_buf(),
+            callback = function ()
+               vim.api.nvim_feedkeys('i', 'n', false)
+            end
+         })
+      end
+
       local keymap = vim.keymap
       keymap.set("n", "<leader>gP", "<cmd>Git pull<CR>", { desc = "Git Pull" })
       keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git Push" })
@@ -93,7 +113,8 @@ return {
       keymap.set("n", "<leader>ga", addFiles, { desc = "Git Add" })
       keymap.set("n", "<leader>gA", "<cmd>Git add --all<CR>", { desc = "Git Add All" })
       keymap.set("n", "<leader>gr", "<cmd>Git reset<CR>", { desc = "Git Reset" })
-      keymap.set("n", "<leader>gs", checkoutBranch, { desc = "Switch Git Branch" })
+      keymap.set("n", "<leader>gs", gitStatus, { desc = "Git Status" })
+      keymap.set("n", "<leader>gcb", checkoutBranch, { desc = "Switch Git Branch" })
       keymap.set("n", "<leader>gnb", newBranch, { desc = "Create Git Branch" })
       keymap.set("n", "<leader>gdb", deleteBranch, { desc = "Delete Git Branch" })
    end,
