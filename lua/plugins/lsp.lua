@@ -11,6 +11,7 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind.nvim",
+      "mracos/mermaid.vim",
    },
    config = function()
       local mason = require("mason")
@@ -24,6 +25,7 @@ return {
       local capabilities = cmp_lsp.default_capabilities()
 
       vim.api.nvim_set_hl(0, "transparentBG", { bg = "NONE", fg = "LightGray" })
+
 
       cmp.setup({
          snippet = {
@@ -46,7 +48,7 @@ return {
          }),
          window = {
             completion = cmp.config.window.bordered({ col_offset = -2, side_padding = 0, border = "rounded" }),
-            documentation = cmp.config.window.bordered({ border = "double" }),
+            documentation = cmp.config.window.bordered({ border = "rounded" }),
          },
          view = {
             entries = { name = "custom", selection_order = "near_cursor" }
@@ -105,6 +107,8 @@ return {
             "rust_analyzer",
             "cmake",
             "ltex",
+            "texlab",
+            "gopls",
          },
          automatic_installation = true,
          handlers = {

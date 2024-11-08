@@ -86,9 +86,33 @@ if CONFIG.theme == "catppuccin" then
       },
    }
    if CONFIG.transparent then
-      print("here")
       OPTIONS.transparent_background = true
    end
    require(theme).setup(OPTIONS)
    vim.cmd([[colorscheme catppuccin]])
+end
+
+if CONFIG.theme == "onedark" then
+   local theme = CONFIG.theme
+   OPTIONS = {
+      style = "dark",
+      transparent = false,
+      term_colors = true,
+      code_style = {
+         comments = "italic",
+         keywords = "italic",
+         functions = "bold",
+         strings = "none",
+         variables = "none"
+      },
+      lualine = {
+         transparent = false,
+      },
+   }
+   if CONFIG.transparent then
+      OPTIONS.transparent = true
+      OPTIONS.lualine.transparent = true
+   end
+   require(theme).setup(OPTIONS)
+   vim.cmd[[colorscheme onedark]]
 end
