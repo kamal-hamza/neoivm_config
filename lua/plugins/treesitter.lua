@@ -1,8 +1,23 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    config = function()
-        local treesitter = require("nvim-treesitter")
-        local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-        ts_update()
-    end,
+   "nvim-treesitter/nvim-treesitter",
+   config = function()
+      local treesitter_config = require("nvim-treesitter.configs")
+      treesitter_config.setup({
+         ensure_installed = {
+            "lua",
+            "vim",
+            "vimdoc",
+            "cpp",
+            "python",
+            "markdown",
+         },
+         auto_install = true,
+         highlight = {
+            enable = true,
+         },
+         indent = {
+            enable = true,
+         },
+      })
+   end,
 }

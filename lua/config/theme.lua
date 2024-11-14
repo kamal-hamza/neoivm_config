@@ -95,7 +95,7 @@ end
 if CONFIG.theme == "onedark" then
    local theme = CONFIG.theme
    OPTIONS = {
-      style = "dark",
+      style = "darker",
       transparent = false,
       term_colors = true,
       code_style = {

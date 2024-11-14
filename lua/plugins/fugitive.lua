@@ -117,5 +117,6 @@ return {
       keymap.set("n", "<leader>gcb", checkoutBranch, { desc = "Switch Git Branch" })
       keymap.set("n", "<leader>gnb", newBranch, { desc = "Create Git Branch" })
       keymap.set("n", "<leader>gdb", deleteBranch, { desc = "Delete Git Branch" })
+      keymap.set("n", "<leader>gD", "<cmd>Git diff<CR>", { desc = "Git Diff File" })
    end,
 }
