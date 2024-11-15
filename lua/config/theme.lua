@@ -17,22 +17,25 @@ end
 if CONFIG.theme == "rose-pine" then
    local theme = CONFIG.theme
    OPTIONS = {
-      enable = {
-         terminal = true,
-         legacy_highlights = true,
-         migrations = true,
-      },
-      styles = {
-         bold = true,
-         italic = true,
-         transparency = false,
-      },
+      disable_background = true,
+      -- enable = {
+      --    terminal = true,
+      --    legacy_highlights = true,
+      --    migrations = true,
+      -- },
+      -- styles = {
+      --    bold = true,
+      --    italic = true,
+      --    transparency = false,
+      -- },
    }
    if CONFIG.transparent then
       OPTIONS.styles.transparency = true
    end
    require(theme).setup(OPTIONS)
    vim.cmd([[colorscheme rose-pine]])
+   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
    return
 end
 
