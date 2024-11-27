@@ -79,7 +79,7 @@ if defined missing_tools (
         REM Install grep if missing
         if %grep_installed% NEQ 0 (
             echo Installing grep...
-            REM Grep is available with Git Bash or can be installed via other package managers like winget or chocolatey
+            winget install grep
         )
 
         echo Missing tools installed successfully!

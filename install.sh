@@ -103,9 +103,11 @@ fi
 
 echo "Cloning repository..."
 git clone "$REPO_URL" "$DEST_DIR"
-cd "$DEST_DIR" || exit
+cd "$DEST_DIR"
 
 # Optional: Remove unnecessary files
 rm -f .git README.MD LICENSE install.sh install.bat
 
 echo "Setup complete!"
+
+exit

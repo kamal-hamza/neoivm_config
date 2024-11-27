@@ -1,7 +1,7 @@
-THEME = "nightfox"
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
+vim.o.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver100-Cursor/lCursor,sm:block-blinkon0"
 vim.api.nvim_set_option("clipboard", "unnamed")
 vim.opt.termguicolors = true
 vim.opt.nu = true

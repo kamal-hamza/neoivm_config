@@ -12,7 +12,6 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind.nvim",
-      "mracos/mermaid.vim",
 
       -- dap dependencies
       "jay-babu/mason-nvim-dap.nvim",
