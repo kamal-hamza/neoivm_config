@@ -119,3 +119,22 @@ if CONFIG.theme == "onedark" then
    require(theme).setup(OPTIONS)
    vim.cmd[[colorscheme onedark]]
 end
+
+if CONFIG.theme == "cyberdream" then
+   local theme = CONFIG.theme
+   OPTIONS = {
+      transparent = CONFIG.transparent,
+      italic_comments = true,
+      borderless_telescope = true,
+      theme = {
+         variant = "dark",
+      },
+      extensions = {
+         telescope = true,
+         treesitter = true,
+         notify = true,
+      }
+   }
+   require(theme).setup(OPTIONS)
+   vim.cmd[[colorscheme cyberdream]]
+end

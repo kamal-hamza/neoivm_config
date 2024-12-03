@@ -1,7 +1,10 @@
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
-vim.o.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver100-Cursor/lCursor,sm:block-blinkon0"
+-- normal cursor
+-- vim.o.guicursor = "n-v-c-sm:block-Cursor/lCursor,i-ci-ve:block-Cursor/lCursor"
+-- Block Cursor
+vim.opt.guicursor = "n-v-i-c:block-Cursor"
 vim.api.nvim_set_option("clipboard", "unnamed")
 vim.opt.termguicolors = true
 vim.opt.nu = true
@@ -11,3 +14,5 @@ vim.opt.wrap = false
 vim.opt.updatetime = 50
 vim.opt.scrolloff = 10
 vim.g.mapleader = " "
+vim.opt.cursorline = true
+vim.opt.number = true
