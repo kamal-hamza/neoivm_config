@@ -94,6 +94,7 @@ cd %DEST_DIR%
 
 REM Optional: Remove unnecessary files
 del /f /q .git
+del /f /q img
 del /f /q README.MD
 del /f /q LICENSE
 del /f /q install.sh
