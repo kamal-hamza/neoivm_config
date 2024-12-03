@@ -106,7 +106,8 @@ git clone "$REPO_URL" "$DEST_DIR"
 cd "$DEST_DIR"
 
 # Optional: Remove unnecessary files
-rm -f .git README.MD LICENSE install.sh install.bat .gitignore
+rm -f README.MD LICENSE install.sh install.bat .gitignore dap.png
+rm -rf .git img
 
 echo "Setup complete!"
 
