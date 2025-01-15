@@ -1,6 +1,6 @@
 CONFIG = {
-   theme = "cyberdream",
-   transparent = true,
+	theme = "nordic",
+	transparent = true,
 }
 
 return CONFIG

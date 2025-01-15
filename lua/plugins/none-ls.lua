@@ -32,11 +32,12 @@ return {
 				"stylua",
 				"clang_format",
 				"black",
+				"latexindent",
 			},
 			methods = {
 				diagnostics = true,
 				formatting = true,
-	      	code_actions = true,
+				code_actions = true,
 				hover = true,
 				completion = true,
 			},
