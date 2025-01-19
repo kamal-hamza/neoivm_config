@@ -6,6 +6,8 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local ibl = require("ibl")
-		ibl.setup({})
+		ibl.setup({
+			scope = { enabled = false },
+		})
 	end,
 }

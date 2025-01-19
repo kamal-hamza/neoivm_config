@@ -7,4 +7,5 @@ return {
 	"navarasu/onedark.nvim",
 	"scottmckendry/cyberdream.nvim",
 	"AlexvZyl/nordic.nvim",
+	"catppuccin/nvim",
 }

@@ -150,3 +150,15 @@ if CONFIG.theme == "nordic" then
 	require(theme).setup(OPTIONS)
 	vim.cmd([[colorscheme nordic]])
 end
+
+if CONFIG.theme == "catppuccin" then
+	local theme = CONFIG.theme
+	OPTIONS = {
+		flavor = "mocha",
+		transparent_background = CONFIG.transparent,
+		no_bold = false,
+		no_italic = false,
+		no_underline = false,
+	}
+	require(theme).setup(OPTIONS)
+end

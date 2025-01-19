@@ -1,5 +1,5 @@
 CONFIG = {
-	theme = "nordic",
+	theme = "catppuccin",
 	transparent = true,
 }
 
