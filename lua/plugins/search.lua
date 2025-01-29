@@ -71,6 +71,7 @@ return {
 		keymap.set("n", "<leader>ff", searchFiles, { desc = "Find Files" })
 		keymap.set("n", "<leader>fp", grepWord, { desc = "Find Word in Project" })
 		keymap.set("n", "<leader>fw", fzf.lgrep_curbuf, { desc = "Find Word in current Buffer" })
+		keymap.set("n", "/", fzf.lgrep_curbuf, { desc = "Find Word in current Buffer" })
 		keymap.set("n", "<leader>sc", spellCheck, { desc = "Spell Check Current Word" })
 		keymap.set("n", "<leader>ftd", "<cmd>TodoFzfLua<CR>", { desc = "Find TODOs in Project" })
 		keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Search current buffers" })

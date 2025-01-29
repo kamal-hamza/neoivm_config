@@ -8,4 +8,5 @@ return {
 	"scottmckendry/cyberdream.nvim",
 	"AlexvZyl/nordic.nvim",
 	"catppuccin/nvim",
+	"Mofiqul/vscode.nvim",
 }

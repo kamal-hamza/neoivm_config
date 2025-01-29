@@ -162,3 +162,12 @@ if CONFIG.theme == "catppuccin" then
 	}
 	require(theme).setup(OPTIONS)
 end
+
+if CONFIG.theme == "vscode" then
+	local theme = CONFIG.theme
+	OPTIONS = {
+		transparent = CONFIG.transparent,
+	}
+	require(theme).setup(OPTIONS)
+	vim.cmd([[colorscheme vscode]])
+end

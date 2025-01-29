@@ -16,3 +16,6 @@ vim.opt.scrolloff = 10
 vim.g.mapleader = " "
 vim.opt.cursorline = true
 vim.opt.number = true
+-- disable copilot notifications
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_suggestion_auto_trigger = false
