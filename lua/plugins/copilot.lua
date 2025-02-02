@@ -1,5 +1,6 @@
 return {
 	"github/copilot.vim",
+	enabled = false,
 	config = function()
 		local keymap = vim.keymap
 		keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
